@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+.venv/
+venv/
+.env
+.env.*
+
+# Node (code-film pipeline)
+node_modules/
+
+# Runtime / local state
+scripts/.seat-state.json
+logs/*.log
+
+# Media outputs (not shipped with the kit)
+*.mp4
+*.mov
+*.m4v
+*.webm
+*.mkv
+*.avi
+renders/
+proof/
+
+# Render stills that slip in
+*_render.png
+*_proof.png
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,36 @@
+# scores.jsonl — schema (lines starting with # are comments, not data)
+#
+# One line per scored run. Append-only. A run is reproducible from
+# (kit_version + brief + model + seed) — record all four.
+#
+# SCHEMA (all fields required unless marked optional):
+# {
+#   "ts":            "ISO-8601 timestamp of scoring, e.g. 2026-09-24T19:30:00-04:00",
+#   "kit_version":   "kit VERSION at run time, e.g. 0.1.0",
+#   "brief":         "brief id, e.g. brief-1-logo-sting",
+#   "model":         "capability class + model, e.g. frontier-reasoning/opus-5.5",
+#   "tier":          "BEST | STUDIO | DRAFT",
+#   "pipeline":      "code-film | mixed-flow | ai-footage",
+#   "seed":          "deterministic seed(s) used, e.g. 42 (optional for ai-footage)",
+#   "scores":        {"visual": 1-5, "story": 1-5, "audio_sync": 1-5,
+#                     "consistency": 1-5, "technical": 1-5},
+#   "judge":         "who scored creative dims, e.g. steven | agent-self | blind-panel",
+#   "cost_usd":      "total API spend for the run, e.g. 0.00",
+#   "wallclock_min": "wall-clock minutes brief→ship, e.g. 95",
+#   "review_loops":  "self-review loop count, e.g. 3",
+#   "pass":          "true if avg(scores) >= 4.0",
+#   "notes":         "free text: what worked, what failed, fixes applied (optional)"
+# }
+#
+# EXAMPLE (commented out — copy, uncomment, fill):
+# {"ts":"2026-09-24T19:30:00-04:00","kit_version":"0.1.0","brief":"brief-1-logo-sting","model":"frontier-reasoning/opus-5.5","tier":"STUDIO","pipeline":"code-film","seed":42,"scores":{"visual":4,"story":4,"audio_sync":5,"consistency":5,"technical":5},"judge":"agent-self","cost_usd":0.00,"wallclock_min":95,"review_loops":3,"pass":true,"notes":"2nd loop fixed headline hold time (reading audit); proof frame proof/frame_04.2s.png"}
+{"ts": "2026-09-25T00:15:00-04:00", "kit_version": "0.1.0", "brief": "brief-1-logo-sting", "aspect": "16x9", "model": "muse-spark", "tier": "STUDIO", "pipeline": "code-film", "seed": 7, "scores": {"visual": 4, "story": 4, "audio_sync": 3, "consistency": 5, "technical": 4}, "judge": "agent-self", "cost_usd": 0.0, "wallclock_min": 25, "review_loops": 3, "pass": true, "notes": "Silent sting (empty audio library; nothing broken, SFX opportunity missed). Lockup hold 48f (<60 guide), iris gives 12 text-free frames (<15 guide) \u2014 both marginal, scored in technical."}
+{"ts": "2026-09-25T00:15:00-04:00", "kit_version": "0.1.0", "brief": "brief-1-logo-sting", "aspect": "9x16", "model": "muse-spark", "tier": "STUDIO", "pipeline": "code-film", "seed": 7, "scores": {"visual": 4, "story": 4, "audio_sync": 3, "consistency": 5, "technical": 4}, "judge": "agent-self", "cost_usd": 0.0, "wallclock_min": 25, "review_loops": 3, "pass": true, "notes": "Center pan-and-scan reframe; lockup is center-weighted so nothing is lost vs 16:9."}
+{"ts": "2026-09-25T00:15:00-04:00", "kit_version": "0.1.0", "brief": "brief-2-character-loop", "aspect": "16x9", "model": "muse-spark", "tier": "STUDIO", "pipeline": "code-film", "seed": 11, "scores": {"visual": 4, "story": 4, "audio_sync": 3, "consistency": 4, "technical": 4}, "judge": "agent-self", "cost_usd": 0.0, "wallclock_min": 20, "review_loops": 2, "pass": false, "notes": "Plays once and irises out \u2014 not a true seamless loop (story docked). Silent (empty library). Butterfly staging changes across shots, masked by wipes."}
+{"ts": "2026-09-25T00:15:00-04:00", "kit_version": "0.1.0", "brief": "brief-2-character-loop", "aspect": "9x16", "model": "muse-spark", "tier": "STUDIO", "pipeline": "code-film", "seed": 11, "scores": {"visual": 4, "story": 3, "audio_sync": 3, "consistency": 4, "technical": 3}, "judge": "agent-self", "cost_usd": 0.0, "wallclock_min": 20, "review_loops": 2, "pass": false, "notes": "Pan-and-scan follows the action per shot, but the butterfly's full flight across the wide meadow is compressed; crop-window jumps are wipe-masked. Composition compromise scored in technical/story."}
+{"ts": "2026-09-25T00:15:00-04:00", "kit_version": "0.1.0", "brief": "brief-3-vox-explainer", "aspect": "16x9", "model": "muse-spark", "tier": "STUDIO", "pipeline": "code-film", "seed": 21, "scores": {"visual": 4, "story": 5, "audio_sync": 5, "consistency": 4, "technical": 4}, "judge": "agent-self", "cost_usd": 0.0, "wallclock_min": 30, "review_loops": 3, "pass": true, "notes": "VO onsets (1.5/8.2/18.2/25.4/32.9s) aligned to shots; two-pass audio. Matrix + 26->41 BLEU figures are ILLUSTRATIVE, not measured (deviation). Script ~90 words vs nominal 200."}
+{"ts": "2026-09-25T00:15:00-04:00", "kit_version": "0.1.0", "brief": "brief-3-vox-explainer", "aspect": "9x16", "model": "muse-spark", "tier": "STUDIO", "pipeline": "code-film", "seed": 21, "scores": {"visual": 3, "story": 4, "audio_sync": 5, "consistency": 4, "technical": 3}, "judge": "agent-self", "cost_usd": 0.0, "wallclock_min": 30, "review_loops": 3, "pass": false, "notes": "Static center crop cuts V1 chip edges and V3 matrix edges (~82px/side); V4 pan follows bars->mixer->output. Explainer diagrams want full width \u2014 vertical is the weakest reframe."}
+{"ts": "2026-09-25T00:15:00-04:00", "kit_version": "0.1.0", "brief": "brief-4-product-ad", "aspect": "16x9", "model": "muse-spark", "tier": "STUDIO", "pipeline": "code-film", "seed": 31, "scores": {"visual": 4, "story": 4, "audio_sync": 5, "consistency": 4, "technical": 3}, "judge": "agent-self", "cost_usd": 0.0, "wallclock_min": 25, "review_loops": 3, "pass": true, "notes": "STUDIO/code-film per parent (brief says BEST/mixed-flow; AI footage replaced by code plates, $0). Logo hold ~70f (<90 minimum) scored in technical. VO onsets inside each 6s plate."}
+{"ts": "2026-09-25T00:15:00-04:00", "kit_version": "0.1.0", "brief": "brief-4-product-ad", "aspect": "9x16", "model": "muse-spark", "tier": "STUDIO", "pipeline": "code-film", "seed": 31, "scores": {"visual": 4, "story": 4, "audio_sync": 5, "consistency": 4, "technical": 3}, "judge": "agent-self", "cost_usd": 0.0, "wallclock_min": 25, "review_loops": 3, "pass": true, "notes": "Pan-and-scan; P3 favors x=500 to keep tent+lantern, else centered. Dial macro and lockup are center-weighted and survive the crop."}
+{"ts": "2026-09-25T00:15:00-04:00", "kit_version": "0.1.0", "brief": "brief-5-short-film", "aspect": "16x9", "model": "muse-spark", "tier": "STUDIO", "pipeline": "code-film", "seed": 51, "scores": {"visual": 5, "story": 4, "audio_sync": 4, "consistency": 5, "technical": 4}, "judge": "agent-self", "cost_usd": 0.0, "wallclock_min": 40, "review_loops": 4, "pass": true, "notes": "STUDIO/code-film per parent (brief says BEST). Premise + 90s 3-movement score authored locally (no supplied premise). S2's 38s walk is slow despite tracking/parallax mitigations. No narration by design."}
+{"ts": "2026-09-25T00:15:00-04:00", "kit_version": "0.1.0", "brief": "brief-5-short-film", "aspect": "9x16", "model": "muse-spark", "tier": "STUDIO", "pipeline": "code-film", "seed": 51, "scores": {"visual": 4, "story": 4, "audio_sync": 4, "consistency": 5, "technical": 4}, "judge": "agent-self", "cost_usd": 0.0, "wallclock_min": 40, "review_loops": 4, "pass": true, "notes": "Crop window tracks the keeper's walk (S1/S2), centered for storm/dawn. Subject stays framed; wide ridge vistas are compressed."}
